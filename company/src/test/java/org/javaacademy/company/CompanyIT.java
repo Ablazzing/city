@@ -1,8 +1,9 @@
-package org.example.company;
+package org.javaacademy.company;
 
 import org.example.profession.Manager;
 import org.example.profession.programmer.Programmer;
 import org.example.profession.programmer.Task;
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
 import java.util.LinkedList;
@@ -29,6 +30,7 @@ public class CompanyIT {
         Company company = new Company("test", programmers, manager, 1500);
         Task task = new Task("test", 10);
         assertDoesNotThrow(() -> company.weekWork(List.of(task)));
+        Assertions.assertTrue(task.isDone());
         assertDoesNotThrow(company::paySalary);
         assertDoesNotThrow(company::printInfo);
     }

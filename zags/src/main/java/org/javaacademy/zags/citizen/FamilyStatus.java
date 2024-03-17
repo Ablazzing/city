@@ -1,4 +1,4 @@
-package org.javaacademy.example.citizen;
+package org.javaacademy.zags.citizen;
 
 public enum FamilyStatus {
     SINGLE,

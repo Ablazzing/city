@@ -1,4 +1,4 @@
-package org.example.company;
+package org.javaacademy.company;
 
 import lombok.NonNull;
 import org.apache.commons.collections4.MultiValuedMap;
@@ -12,6 +12,7 @@ import java.math.BigDecimal;
 import java.util.Collection;
 import java.util.Deque;
 import java.util.HashMap;
+import java.util.List;
 import java.util.stream.Collectors;
 
 import static java.math.BigDecimal.ZERO;
@@ -67,8 +68,10 @@ public class Company {
     }
 
     public void printInfo() {
-        String work = completedTasks.asMap().entrySet().stream()
-                .map(e -> e.getKey().getFullName() + " - " + e.getValue().stream().map(Task::getDescription).toList())
+        String work = completedTasks.asMap()
+                .entrySet()
+                .stream()
+                .map(e -> e.getKey().getFullName() + " - " + getTaskDescriptions(e.getValue()))
                 .collect(Collectors.joining("\n"));
         String text = """
                 %s
@@ -77,5 +80,9 @@ public class Company {
                 %s
                 """.formatted(name, costs, work);
         System.out.println(text);
+    }
+
+    private List<String> getTaskDescriptions(Collection<Task> tasks) {
+        return tasks.stream().map(Task::getDescription).toList();
     }
 }

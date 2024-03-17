@@ -1,8 +1,8 @@
-package org.javaacademy.example.civilregistry;
+package org.javaacademy.zags.civilregistry;
 
 import lombok.NonNull;
 import lombok.RequiredArgsConstructor;
-import org.javaacademy.example.citizen.Citizen;
+import org.javaacademy.zags.citizen.Citizen;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
@@ -11,10 +11,12 @@ import java.util.Map;
 import java.util.Set;
 import java.util.TreeMap;
 
-import static org.javaacademy.example.civilregistry.CitizenActionType.BIRTH;
-import static org.javaacademy.example.civilregistry.CitizenActionType.DIVORCE;
-import static org.javaacademy.example.civilregistry.CitizenActionType.MARRIAGE;
 import static org.javaacademy.human.Human.checkHumansIsDifferentSex;
+import static org.javaacademy.zags.citizen.FamilyStatus.DIVORCED;
+import static org.javaacademy.zags.citizen.FamilyStatus.MARRIED;
+import static org.javaacademy.zags.civilregistry.CitizenActionType.BIRTH;
+import static org.javaacademy.zags.civilregistry.CitizenActionType.DIVORCE;
+import static org.javaacademy.zags.civilregistry.CitizenActionType.MARRIAGE;
 
 @RequiredArgsConstructor
 public class CivilRegistry {
@@ -34,6 +36,8 @@ public class CivilRegistry {
         checkHumansIsDifferentSex(human, anotherHuman);
         human.setCoupleHuman(anotherHuman);
         anotherHuman.setCoupleHuman(human);
+        human.setFamilyStatus(MARRIED);
+        anotherHuman.setFamilyStatus(MARRIED);
         CitizenActionRecord actionRecord = new CitizenActionRecord(MARRIAGE, registerDate, Set.of(human, anotherHuman));
         addActionForDate(registerDate, actionRecord);
     }
@@ -42,6 +46,8 @@ public class CivilRegistry {
         checkCitizensIsCouple(human, anotherHuman);
         human.setCoupleHuman(null);
         anotherHuman.setCoupleHuman(null);
+        human.setFamilyStatus(DIVORCED);
+        anotherHuman.setFamilyStatus(DIVORCED);
         CitizenActionRecord actionRecord = new CitizenActionRecord(DIVORCE, registerDate, Set.of(human, anotherHuman));
         addActionForDate(registerDate, actionRecord);
     }
@@ -60,7 +66,8 @@ public class CivilRegistry {
     }
 
     private void checkCitizensIsCouple(Citizen human, Citizen anotherHuman) {
-        if (human == null || !human.getCoupleHuman().equals(anotherHuman)) {
+        checkHumansIsDifferentSex(human, anotherHuman);
+        if (human.getCoupleHuman() == null || human.equals(anotherHuman)) {
             throw new RuntimeException("Humans not a couple");
         }
     }

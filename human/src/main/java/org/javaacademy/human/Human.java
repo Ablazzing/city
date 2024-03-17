@@ -1,4 +1,4 @@
-package org.javaacademy.zags.human;
+package org.javaacademy.human;
 
 import lombok.Data;
 import lombok.EqualsAndHashCode;

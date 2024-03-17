@@ -1,4 +1,4 @@
-package org.javaacademy.example.citizen;
+package org.javaacademy.zags.citizen;
 
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
@@ -10,7 +10,7 @@ import org.javaacademy.human.Human;
 
 import java.util.HashSet;
 
-import static org.javaacademy.example.citizen.FamilyStatus.SINGLE;
+import static org.javaacademy.zags.citizen.FamilyStatus.SINGLE;
 
 @ToString
 @Getter @Setter
@@ -18,19 +18,19 @@ import static org.javaacademy.example.citizen.FamilyStatus.SINGLE;
 @EqualsAndHashCode(callSuper = true)
 public class Citizen extends Human {
     @EqualsAndHashCode.Exclude
-    private FamilyStatus familyStatus;
+    private FamilyStatus familyStatus = SINGLE;
     @EqualsAndHashCode.Exclude
     private Citizen coupleHuman;
 
     public Citizen(@NonNull String firstName, @NonNull String lastName,
                    @NonNull String middleName,
-                   @NonNull Boolean isMale, FamilyStatus familyStatus) {
+                   @NonNull Boolean isMale) {
         super(firstName, lastName, middleName, isMale);
-        this.familyStatus = familyStatus;
     }
 
     public Citizen birthNewHuman(String firstName, String middleName,
                                 Boolean isMale, Human anotherHuman) {
+
         checkHumansIsDifferentSex(this, anotherHuman);
         Citizen child = Citizen.builder()
                 .firstName(firstName)

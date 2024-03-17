@@ -1,4 +1,4 @@
-package org.javaacademy.example.civilregistry;
+package org.javaacademy.zags.civilregistry;
 
 public enum CitizenActionType {
     BIRTH, MARRIAGE, DIVORCE

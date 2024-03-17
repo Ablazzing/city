@@ -1,6 +1,6 @@
-package org.javaacademy.example.civilregistry;
+package org.javaacademy.zags.civilregistry;
 
-import org.javaacademy.example.citizen.Citizen;
+import org.javaacademy.zags.citizen.Citizen;
 
 import java.time.LocalDate;
 import java.util.Set;

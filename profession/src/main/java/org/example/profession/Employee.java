@@ -1,11 +1,39 @@
+package org.example.profession;
+
+import lombok.Getter;
 import lombok.NonNull;
-import lombok.RequiredArgsConstructor;
 import org.javaacademy.human.Human;
 
+import java.math.BigDecimal;
 
-public class Employee extends Human {
+import static java.math.BigDecimal.ZERO;
+import static java.math.BigDecimal.valueOf;
 
-    public Employee(@NonNull String firstName, @NonNull String lastName, @NonNull String middleName, @NonNull Boolean isMale) {
+@Getter
+public abstract class Employee extends Human {
+    private Integer hourRate;
+    protected BigDecimal totalSalary = ZERO;
+
+
+    public Employee(@NonNull String firstName, @NonNull String lastName,
+                    @NonNull String middleName, @NonNull Boolean isMale) {
         super(firstName, lastName, middleName, isMale);
+    }
+
+    public Employee(@NonNull String firstName, @NonNull String lastName, @NonNull String middleName,
+                    @NonNull Boolean isMale, Integer hourRate) {
+        super(firstName, lastName, middleName, isMale);
+        this.hourRate = hourRate;
+    }
+
+    public void payHours(BigDecimal countHours) {
+        if (countHours.compareTo(ZERO) < 1) {
+            throw new RuntimeException("Count hours zero or minus");
+        }
+        totalSalary = totalSalary.add(countHours.multiply(valueOf(hourRate)));
+    }
+
+    public void setHourRate(Integer hourRate) {
+        this.hourRate = hourRate;
     }
 }

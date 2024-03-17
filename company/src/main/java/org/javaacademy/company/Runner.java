@@ -1,4 +1,4 @@
-package org.example.company;
+package org.javaacademy.company;
 
 import org.example.profession.Manager;
 import org.example.profession.programmer.Programmer;
